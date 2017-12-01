@@ -80,6 +80,23 @@ public class database_operations {
         }
     }
 
+     public void UpdateFee(String T_plan,int payment , int total , String name , String date,int feeid) {
+        Connection conn = connect();
+        try {
+            String fee = "UPDATE fees set T_plan=?, payment=? , total=? , name=? , date=? where feeid=?";
+            PreparedStatement prs = conn.prepareStatement(fee);
+            prs.setString(1, T_plan);
+            prs.setInt(2, payment);
+            prs.setInt(3, total);
+            prs.setString(4, name);
+            prs.setString(5, date);
+            prs.executeUpdate();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 3);
+
+        }
+    }
     public void UpdateDate(int id, String nameN, String teleN, int ageN, String addressN) {
         Connection conn = connect();
         try {
@@ -214,4 +231,16 @@ public class database_operations {
         }
         return mod;
     }
+     public void DeleteFee(String T_plan,int payment , int total , String name , String date,int feeid) {
+        Connection conn = connect();
+        try {
+            String fee = "DELETE FROM fees where feeid=? ";
+            PreparedStatement prs = conn.prepareStatement(fee);
+            prs.executeUpdate();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 3);
+
+        }
+}
 }
