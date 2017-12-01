@@ -15,7 +15,7 @@ public class database_operations {
     public Connection connect() {
         Connection conn = null;
         try {
-            Class.forName("org.sqlite.JDBC");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\gaber\\mamav.db");
             JOptionPane.showMessageDialog(null, "database is connected", "sdad", 3);
 
@@ -62,10 +62,17 @@ public class database_operations {
         }
     }
 
-    public void InsertFee(String T_plan,int payment , int total , String name ) {
+    public void InsertFee(String T_plan,int payment , int total , String name , String date) {
         Connection conn = connect();
         try {
-            String fee = "INSERT INTO fee ()";
+            String fee = "INSERT INTO fee (T_plan, payment , total , name ,date ) values (?,?,?,?,?)";
+            PreparedStatement prs = conn.prepareStatement(fee);
+            prs.setString(1, T_plan);
+            prs.setInt(2, payment);
+            prs.setInt(3, total);
+            prs.setString(4, name);
+            prs.setString(5, date);
+            prs.executeUpdate();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 3);
