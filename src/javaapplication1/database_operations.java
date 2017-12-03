@@ -199,6 +199,74 @@ public class database_operations {
         }
         return mod;
     }
+     public DefaultTableModel select_appointments_with_filter(String query) {
+        Connection conn = connect();
+        DefaultTableModel mod = new DefaultTableModel();
+        Object rowdata[] = new Object[23];
+
+        try {
+            String sql = "select * from appointments"+query;
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                String Name = rs.getString(1);
+                String Address = rs.getString(2);
+                int Age = rs.getInt(3);
+                String Job = rs.getString(4);
+                String MobilePhone = rs.getString(5);
+                String Soker = rs.getString(6);
+                String virous = rs.getString(7);
+                String syolt_dam = rs.getString(8);
+                String odah = rs.getString(9);
+                String awram = rs.getString(10);
+                String d8teldam = rs.getString(11);
+                String amradel2alb = rs.getString(12);
+                String smoker = rs.getString(13);
+                String hsaysya = rs.getString(14);
+                String Romatezm = rs.getString(15);
+                String Surgery = rs.getString(16);
+                String kmayah = rs.getString(17);
+                String Esh3a3y = rs.getString(18);
+                String Kortezon = rs.getString(19);
+                String hsasya_mn_el_adwayh = rs.getString(20);
+                String hamel = rs.getString(21);
+                String reda3ah = rs.getString(22);
+                String notes = rs.getString(23);
+
+                rowdata[0] = Name;
+                rowdata[1] = Age;
+                rowdata[2] = Address;
+                rowdata[3] = Job;
+                rowdata[4] = MobilePhone;
+                rowdata[5] = Soker;
+                rowdata[6] = virous;
+                rowdata[7] = syolt_dam;
+                rowdata[8] = odah;
+                rowdata[9] = awram;
+                rowdata[10] = d8teldam;
+                rowdata[11] = amradel2alb;
+                rowdata[12] = smoker;
+                rowdata[13] = hsaysya;
+                rowdata[14] = Romatezm;
+                rowdata[15] = Surgery;
+                rowdata[16] = kmayah;
+                rowdata[17] = Esh3a3y;
+                rowdata[18] = Kortezon;
+                rowdata[19] = hsasya_mn_el_adwayh;
+                rowdata[20] = hamel;
+                rowdata[21] = reda3ah;
+                rowdata[22] = notes;
+                mod.addRow(rowdata);
+
+            }
+            return mod;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 3);
+
+        }
+        return mod;
+    }
 
     public DefaultTableModel select() {
         Connection conn = connect();
